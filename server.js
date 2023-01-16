@@ -15,15 +15,11 @@ app.use(bodyParser.json());
 // routes
 const bookingRoute = require("./routes/booking.js");
 const statusRoute = require("./routes/status.js");
+const adminRoutes = require("./routes/admin.js");
 
 app.use(bookingRoute);
 app.use(statusRoute);
-
-// reseting code
-app.get("/reset", async (req, res) => {
-  await sequelize.sync({ force: true });
-  res.status(200);
-});
+app.use(adminRoutes);
 
 app.use((req, res, next) => {
   return res.status(404).json({ success: false, error: "page not found" });
