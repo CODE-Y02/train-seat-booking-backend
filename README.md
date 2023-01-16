@@ -1,5 +1,9 @@
 # train-seat-booking-backend
 
+## setup intstruction ;
+
+> clone project and do npm i to install all packages
+
 ## Assumption
 
 > I am assuming no gap between seats and only single pathway
