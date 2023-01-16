@@ -22,6 +22,7 @@ app.use(statusRoute);
 // reseting code
 app.get("/reset", async (req, res) => {
   await sequelize.sync({ force: true });
+  res.status(200);
 });
 
 app.use((req, res, next) => {
