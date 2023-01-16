@@ -19,6 +19,11 @@ const statusRoute = require("./routes/status.js");
 app.use(bookingRoute);
 app.use(statusRoute);
 
+// reseting code
+app.get("/reset", async (req, res) => {
+  await sequelize.sync({ force: true });
+});
+
 app.use((req, res, next) => {
   return res.status(404).json({ success: false, error: "page not found" });
 });
@@ -36,8 +41,7 @@ Seat.belongsTo(Row);
 
 const startApp = async () => {
   try {
-    // await sequelize.sync();
-    await sequelize.sync({ force: true });
+    await sequelize.sync();
 
     let coach = await Coach.findByPk(1);
 
