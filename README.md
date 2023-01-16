@@ -12,7 +12,7 @@
 ## end points
 
 > "status" --> will give total seats and available seats in coach
-> "status/bookingStatus" --> will give all seats
+> "bookingStatus" --> will give all seats
 
 > "/book" --> will accept no of seats and allocatte it
 
