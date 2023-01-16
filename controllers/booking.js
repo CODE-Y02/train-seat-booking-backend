@@ -1,6 +1,6 @@
 const Coach = require("../models/Coach");
 const Row = require("../models/Row");
-const Seat = require("../models/seat");
+const Seat = require("../models/Seat");
 
 module.exports.bookSeats = async (req, res, next) => {
   try {

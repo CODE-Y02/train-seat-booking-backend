@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 // models
 const Coach = require("./models/Coach.js");
 const Row = require("./models/Row.js");
-const Seat = require("./models/seat.js");
+const Seat = require("./models/Seat.js");
 
 Coach.hasMany(Row);
 Row.belongsTo(Coach);
