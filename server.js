@@ -17,7 +17,7 @@ const bookingRoute = require("./routes/booking.js");
 const statusRoute = require("./routes/status.js");
 
 app.use(bookingRoute);
-app.use("/satus", statusRoute);
+app.use(statusRoute);
 
 app.use((req, res, next) => {
   return res.status(404).json({ success: false, error: "page not found" });

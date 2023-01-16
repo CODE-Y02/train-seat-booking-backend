@@ -9,6 +9,6 @@ const router = express.Router();
 // status --> get --> rows + col
 
 router.get("/bookingStatus", bookedRowsAndSeats);
-router.get("/satus", totalVacentSeats);
+router.get("/status", totalVacentSeats);
 
 module.exports = router;
