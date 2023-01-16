@@ -47,7 +47,9 @@ const startApp = async () => {
         available: 80,
       });
     }
-    app.listen(3000);
+    app.listen(process.env.SERVER_PORT || 3000, () => {
+      console.log("\n\n  app.running at ", process.env.SERVER_PORT || 3000);
+    });
   } catch (error) {
     console.log(`\n ${error} \n`);
   }
