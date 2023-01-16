@@ -36,8 +36,8 @@ Seat.belongsTo(Row);
 
 const startApp = async () => {
   try {
-    await sequelize.sync();
-    // await sequelize.sync({ force: true });
+    // await sequelize.sync();
+    await sequelize.sync({ force: true });
 
     let coach = await Coach.findByPk(1);
 

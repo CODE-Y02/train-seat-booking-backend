@@ -14,15 +14,17 @@ module.exports.bookSeats = async (req, res, next) => {
     }
 
     // find all rows in desc order
-    let rows = await Row.findAll({ order: [["id", "DESC"]] });
-    // console.log("\n\n\n   ");
-    // console.log(rows);
-    // console.log("\n\n\n   ");
+    let row = await Row.findOne({
+      order: [["id", "DESC"]],
+      where: {
+        isBooked: false,
+      },
+    });
 
     let newSeats = [];
 
-    // if !rows --> first booking --> create row
-    if (!rows.length || !rows) {
+    // if !rows --> no vacent --> create row
+    if (!row) {
       let vacency = 7;
       if (coach.available < 7) vacency = coach.available % 7;
 
@@ -38,14 +40,7 @@ module.exports.bookSeats = async (req, res, next) => {
         i++;
       }
 
-      //   console.log("\n\n\n   ");
-      //   console.log(p);
-      //   console.log("\n\n\n   ");
-
       newSeats = await Promise.all(p);
-      //   console.log("\n\n\n   ");
-      //   console.log(newSeats);
-      //   console.log("\n\n\n   ");
 
       vacency = vacency - n;
 
@@ -55,23 +50,20 @@ module.exports.bookSeats = async (req, res, next) => {
       } else {
         await Row.update({ vacency }, { where: { id: r.id } });
       }
-    } else if (rows.length) {
-      // if row
-      const vacentRow = await Row.findOne({
-        order: [["id", "DESC"]],
-        where: {
-          isBooked: false,
-        },
-      }); // most recent
+    } else if (row) {
+      // if vacent row
+      const vacentRow = row;
       // filter row find vacent in recent row
 
       // if row.vacency >= n --> fill it
 
-      //   console.log(" \n\n\n >>>>>", vacentRow);
-      let vacency = vacentRow.vacency;
+      console.log(" \n\n\n >>>>>", vacentRow);
+      let vacency;
+      if (!vacentRow) vacency = 0;
+      else vacency = vacentRow.vacency;
       let n = seats_to_book;
 
-      if (vacency >= n) {
+      if (vacency >= n && vacency) {
         let p = [];
 
         while (n) {
@@ -90,14 +82,7 @@ module.exports.bookSeats = async (req, res, next) => {
           await Row.update({ vacency }, { where: { id: vacentRow.id } });
         }
 
-        // console.log("\n\n\n   ");
-        // console.log(p);
-        // console.log("\n\n\n   ");
-
         newSeats = await Promise.all(p);
-        // console.log("\n\n\n   ");
-        // console.log(newSeats);
-        // console.log("\n\n\n   ");
       } else {
         // if row.vacency < n
         let p = [];
