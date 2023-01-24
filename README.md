@@ -4,6 +4,8 @@
 - [client Repo](https://github.com/CODE-Y02/train-seat-booking-client)
 - [LIVE URL](https://train-seat-booking-client.onrender.com/)
 
+> when using live version , try to refresh or wait as hosted server are slow 
+
 ## setup intstruction ;
 
 > clone project and do npm i to install all packages
